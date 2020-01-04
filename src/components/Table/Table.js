@@ -8,25 +8,28 @@ class Table extends Component {
   };
 
   componentDidMount() {
-    API.search("?results=100")
+    API.search("?results=5")
       .then(res => this.setState({ employees: res.data }))
       .catch(err => console.log(err));
   }
 
   render() {
-    console.log(this.state.employees.results);
-    const results = this.state.employees.results
-    console.log(results)
-    // const employeesList = results.forEach((e, index) => (
-    //   <TableRow
-    //     key={index}
-    //     imageURL={e.picture.thumbnail}
-    //     name={e.name.first + e.name.last}
-    //     phone={e.phone}
-    //     email={e.email}
-    //     DOB={e.dob}
-    //   />
-    // ));
+    console.log(typeof this.state.employees.results);
+    const results = this.state.employees.results;
+    console.log(typeof results);
+    if (results) {
+      const employeesList = results.forEach((e, index) => (
+        <TableRow
+          key={index}
+          imageURL={e.picture.thumbnail}
+          name={e.name.first + e.name.last}
+          phone={e.phone}
+          email={e.email}
+          DOB={e.dob}
+        />
+      ));
+    }
+
     return (
       <div>
         <table className="table table-striped table-ho">
@@ -40,7 +43,7 @@ class Table extends Component {
             </tr>
           </thead>
           <tbody>
-            {/* {employeesList} */}
+            {employeesList}
             <TableRow
               imageURL={""}
               name={"Ashley"}

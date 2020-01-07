@@ -11,7 +11,7 @@ function TableRow(props) {
         <td>{props.name}</td>
         <td>{props.phone}</td>
         <td>{props.email}</td>
-        <td>{props.DOB}</td>
+        <td>{props.DOB.date}</td>
       </tr>
     </>
   );

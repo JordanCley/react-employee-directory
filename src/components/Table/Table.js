@@ -1,37 +1,49 @@
 import React, { Component } from "react";
 import TableRow from "../TableRow/TableRow";
+import SearchBar from "../SearchBar/SearchBar";
 import API from "../../utils/API";
 
 class Table extends Component {
   state = {
-    employees: {}
+    result: [],
+    search: ""
   };
 
   componentDidMount() {
-    API.search("?results=5")
-      .then(res => this.setState({ employees: res.data }))
+    API.search()
+      .then(res => this.setState(() => ({ result: res.data.results })))
       .catch(err => console.log(err));
   }
 
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
   render() {
-    console.log(typeof this.state.employees.results);
-    const results = this.state.employees.results;
-    console.log(typeof results);
-    if (results) {
-      const employeesList = results.forEach((e, index) => (
-        <TableRow
-          key={index}
-          imageURL={e.picture.thumbnail}
-          name={e.name.first + e.name.last}
-          phone={e.phone}
-          email={e.email}
-          DOB={e.dob}
-        />
-      ));
-    }
+    const newResults = this.state.result;
+
+    let employeesList = [];
+
+    employeesList = newResults.map((e, index) => (
+      <TableRow
+        key={index}
+        imageURL={e.picture.thumbnail}
+        name={e.name.first + e.name.last}
+        phone={e.phone}
+        email={e.email}
+        DOB={e.dob}
+      />
+    ));
 
     return (
       <div>
+        <SearchBar
+          search={this.state.search}
+          handleInputChange={this.handleInputChange}
+        />
         <table className="table table-striped table-ho">
           <thead className="thead-dark">
             <tr>
@@ -42,16 +54,7 @@ class Table extends Component {
               <th scope="col">DOB</th>
             </tr>
           </thead>
-          <tbody>
-            {employeesList}
-            <TableRow
-              imageURL={""}
-              name={"Ashley"}
-              phone={"765-253-9964"}
-              email={"AshleyLove@love.com"}
-              DOB={"11/13/1986"}
-            />
-          </tbody>
+          <tbody>{employeesList}</tbody>
         </table>
       </div>
     );

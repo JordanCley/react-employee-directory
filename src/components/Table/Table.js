@@ -3,6 +3,8 @@ import TableRow from "../TableRow/TableRow";
 import SearchBar from "../SearchBar/SearchBar";
 import API from "../../utils/API";
 
+
+
 class Table extends Component {
   state = {
     result: [],
@@ -22,12 +24,18 @@ class Table extends Component {
     });
   };
 
+  handleSearch(search){
+    return employee =>{
+      return employee.name.first.toLowerCase().includes(search.toLowerCase()) || !search
+    }
+  }
+
   render() {
     const newResults = this.state.result;
 
     let employeesList = [];
 
-    employeesList = newResults.map((e, index) => (
+    employeesList = newResults.filter(this.handleSearch(this.state.search)).map((e, index) => (
       <TableRow
         key={index}
         imageURL={e.picture.thumbnail}
@@ -39,7 +47,7 @@ class Table extends Component {
     ));
 
     return (
-      <div>
+      <div className="Main">
         <SearchBar
           search={this.state.search}
           handleInputChange={this.handleInputChange}

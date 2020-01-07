@@ -9,7 +9,6 @@ function App() {
   return (
    <div>
      <Jumbotron />
-     {/* <SearchBar /> */}
      <Table />
    </div>
   );

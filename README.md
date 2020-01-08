@@ -9,7 +9,7 @@ eventually like to add sorting and filtering options for the table head fields.
 
 ## Deployed
 
-[Fitness-Tracker](https://fast-sea-24135.herokuapp.com/)
+[react-employee-directory](https://desolate-crag-34721.herokuapp.com/)
 
 ![react-employee-directory UI](./react-employee-directory.gif)
 

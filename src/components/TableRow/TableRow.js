@@ -11,7 +11,7 @@ function TableRow(props) {
         <td>{props.name}</td>
         <td>{props.phone}</td>
         <td>{props.email}</td>
-        <td>{props.DOB.date}</td>
+        <td>{props.DOB.date.split("-")[1] + "-" + props.DOB.date.split("-")[2].slice(0,2) + "-" + props.DOB.date.split("-")[0]}</td>
       </tr>
     </>
   );
